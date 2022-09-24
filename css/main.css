@@ -173,7 +173,7 @@ ol, li {
   display: inline-block;
   width: 1.5rem;
   height: 1.5rem;
-  background-color: #333;
+  background-color: #fff;
   background-clip: content-box;
   border: 0.25rem solid transparent;
   border-radius: 50%;
@@ -201,6 +201,11 @@ ol, li {
   left: -1rem;
 }
 
+h1,
+p {
+  color: #fff;
+}
+
 .carousel::after,
 .carousel__next {
   right: -1rem;
@@ -210,7 +215,7 @@ ol, li {
 .carousel::after {
   content: '';
   z-index: 1;
-  background-color: #333;
+  background-color: #fff;
   background-size: 1.5rem 1.5rem;
   background-repeat: no-repeat;
   background-position: center center;
@@ -222,11 +227,11 @@ ol, li {
 }
 
 .carousel::before {
-  background-image: url("https://i.ibb.co/khT1zfK/icons8-chevron-left-90.png");
+  background-image: url("https://img.icons8.com/ios-glyphs/452/chevron-left.png");
 }
 
 .carousel::after {
-  background-image: url("https://i.ibb.co/KhhVqQt/icons8-chevron-right-90.png");
+  background-image: url("https://img.icons8.com/ios-glyphs/344/chevron-right.png");
 }
 
 /* Split the screen in half */
