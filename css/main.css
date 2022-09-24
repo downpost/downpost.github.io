@@ -103,12 +103,12 @@ ol, li {
   position: relative;
   flex: 0 0 100%;
   width: 100%;
-  background-color: #ffffff;
+  background-color: #3b444b;
   counter-increment: item;
 }
 
 .carousel__slide:nth-child(even) {
-  background-color: #ffffff;
+  background-color: #3b444b;
 }
 
 .carousel__slide:before {
