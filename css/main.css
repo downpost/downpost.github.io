@@ -134,7 +134,7 @@ ol, li {
   .carousel__snapper {
     animation-name: tonext, snap;
     animation-timing-function: ease;
-    animation-duration: 4s;
+    animation-duration: 0s;
     animation-iteration-count: infinite;
   }
 
@@ -220,11 +220,11 @@ ol, li {
 }
 
 .carousel::before {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='0,50 80,100 80,0' fill='%23fff'/%3E%3C/svg%3E");
+  background-image: url("https://i.ibb.co/khT1zfK/icons8-chevron-left-90.png");
 }
 
 .carousel::after {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='100,50 20,100 20,0' fill='%23fff'/%3E%3C/svg%3E");
+  background-image: url("https://i.ibb.co/KhhVqQt/icons8-chevron-right-90.png");
 }
 
 /* Split the screen in half */
