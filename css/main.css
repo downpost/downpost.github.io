@@ -48,6 +48,7 @@ body {
   margin: 0 auto;
   padding: 0 1.25rem;
   font-family: 'Lato', sans-serif;
+  background-color: #3b444b;
 }
 
 * {
@@ -97,6 +98,7 @@ ol, li {
   counter-reset: item;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
+  background-color: #3b444b;
 }
 
 .carousel__slide {
