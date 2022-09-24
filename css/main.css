@@ -1,109 +1,253 @@
-html {
-  font-family:'Helvetica', 'Arial';
-  background: url(https://github.com/aiudio/aiudio.github.io/blob/main/css/bg.jpg?raw=true) no-repeat center center fixed; 
-  background-size: cover;
+@keyframes tonext {
+  75% {
+    left: 0;
+  }
+  95% {
+    left: 100%;
+  }
+  98% {
+    left: 100%;
+  }
+  99% {
+    left: 0;
+  }
+}
+
+@keyframes tostart {
+  75% {
+    left: 0;
+  }
+  95% {
+    left: -300%;
+  }
+  98% {
+    left: -300%;
+  }
+  99% {
+    left: 0;
+  }
+}
+
+@keyframes snap {
+  96% {
+    scroll-snap-align: center;
+  }
+  97% {
+    scroll-snap-align: none;
+  }
+  99% {
+    scroll-snap-align: none;
+  }
+  100% {
+    scroll-snap-align: center;
+  }
+}
+
+body {
+  max-width: 37.5rem;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  font-family: 'Lato', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  scrollbar-color: transparent transparent; /* thumb and track color */
+  scrollbar-width: 0px;
+}
+
+*::-webkit-scrollbar {
+  width: 0;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: transparent;
+  border: none;
+}
+
+* {
+  -ms-overflow-style: none;
+}
+
+ol, li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.carousel {
+  position: relative;
+  padding-top: 75%;
+  filter: drop-shadow(0 0 10px #0003);
+  perspective: 100px;
+}
+
+.carousel__viewport {
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  overflow-x: scroll;
+  counter-reset: item;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+}
+
+.carousel__slide {
+  position: relative;
+  flex: 0 0 100%;
+  width: 100%;
+  background-color: #ffffff;
+  counter-increment: item;
+}
+
+.carousel__slide:nth-child(even) {
+  background-color: #ffffff;
+}
+
+.carousel__slide:before {
+  content: counter("1");
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%,-40%,70px);
+  color: #fff;
+  font-size: 2em;
+}
+
+.carousel__snapper {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
+  scroll-snap-align: center;
 }
-body {
-    font-family:'Helvetica', 'Arial';
-    margin: 60px auto;
-    width: 70%;
-  /*blur code (below) suggested and provided by jeffalo*/
-    backdrop-filter: blur(34px) brightness(0.85);
-    padding: 4em
+
+@media (hover: hover) {
+  .carousel__snapper {
+    animation-name: tonext, snap;
+    animation-timing-function: ease;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+  }
+
+  .carousel__slide:last-child .carousel__snapper {
+    animation-name: tostart, snap;
+  }
 }
-nav ul, footer ul {
-    font-family:'Helvetica', 'Arial';
-    padding: 0px;
-    list-style: none;
-    font-weight: bold;
-    color: white;
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel__snapper {
+    animation-name: none;
+  }
 }
-nav ul li, footer ul li {
-    font-family:'Helvetica', 'Arial';
-    display: inline;
-    margin-right: 20px;
-    color: white;
+
+.carousel:hover .carousel__snapper,
+.carousel:focus-within .carousel__snapper {
+  animation-name: none;
 }
-selected {
-    font-family:'Helvetica', 'Arial';
-    font-size: 1.5em;
-    text-decoration: none;
-    color: white;
+
+.carousel__navigation {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: center;
 }
-a {
-    font-family:'Helvetica', 'Arial';
-    text-decoration: none;
-    color: white;
+
+.carousel__navigation-list,
+.carousel__navigation-item {
+  display: inline-block;
 }
-a:hover {
-    font-family:'Helvetica', 'Arial';
-    text-decoration: underline;
-    color: white;
+
+.carousel__navigation-button {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: #333;
+  background-clip: content-box;
+  border: 0.25rem solid transparent;
+  border-radius: 50%;
+  font-size: 0;
+  transition: transform 0.1s;
 }
-h1 {
-    font-size: 3em;
-    font-family:'Helvetica', 'Arial';
-    color: white;
+
+.carousel::before,
+.carousel::after,
+.carousel__prev,
+.carousel__next {
+  position: absolute;
+  top: 0;
+  margin-top: 37.5%;
+  width: 4rem;
+  height: 4rem;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  font-size: 0;
+  outline: 0;
 }
-h2 {
-    font-size: 2.5em;
-    font-family:'Helvetica', 'Arial';
-    color: white;
+
+.carousel::before,
+.carousel__prev {
+  left: -1rem;
 }
-h3 {
-    font-size: 2em;
-    font-family:'Helvetica', 'Arial';
-    color: white;
+
+.carousel::after,
+.carousel__next {
+  right: -1rem;
 }
-p {
-    font-family:'Helvetica';
-    font-size: 1.5em;
-    line-height: 1.4em;
-    color: white;
+
+.carousel::before,
+.carousel::after {
+  content: '';
+  z-index: 1;
+  background-color: #333;
+  background-size: 1.5rem 1.5rem;
+  background-repeat: no-repeat;
+  background-position: center center;
+  color: #fff;
+  font-size: 2.5rem;
+  line-height: 4rem;
+  text-align: center;
+  pointer-events: none;
 }
-footer {
-    font-family:'Helvetica', 'Arial';
-    border-top: 1px solid #d5d5d5;
-    font-size: .8em;
-    color: white;
+
+.carousel::before {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='0,50 80,100 80,0' fill='%23fff'/%3E%3C/svg%3E");
 }
-ul.posts { 
-    font-family:'Helvetica', 'Arial';
-    margin: 20px auto 40px; 
-    font-size: 1.5em;
-    color: white;
+
+.carousel::after {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='100,50 20,100 20,0' fill='%23fff'/%3E%3C/svg%3E");
 }
-ul.posts li {
-    font-family:'Helvetica', 'Arial';
-    list-style: none;
-    color: white;
+
+/* Split the screen in half */
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
 }
-a.button1{
- display:inline-block;
- padding:0.35em 1.2em;
- border:0.1em solid #FFFFFF;
- margin:0 0.3em 0.3em 0;
- border-radius:0.12em;
- box-sizing: border-box;
- text-decoration:none;
- font-family:'Roboto',sans-serif;
- font-weight:300;
- color:#FFFFFF;
- text-align:center;
- transition: all 0.2s;
+
+/* Control the left side */
+.left {
+  top: 0;
+  background-color: #111;
 }
-a.button1:hover{
- color:#000000;
- background-color:#FFFFFF;
+
+/* Control the right side */
+.right {
+  bottom: 0;
+  background-color: red;
 }
-@media all and (max-width:30em){
- a.button1{
-  display:block;
-  margin:0.4em auto;
- }
-}
+
+
